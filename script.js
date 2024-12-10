@@ -1,8 +1,9 @@
 function mostrarDicas() {
     const tipoPele = document.getElementById("tipo-pele").value;
     const dicasDiv = document.getElementById("dicas-personalizadas");
+
+    let dicas;
     
-    let dicas = "";
     switch (tipoPele) {
         case "oleosa":
             dicas = "<p>Para pele oleosa, use produtos em gel e evite cremes muito pesados. Procure por ingredientes como ácido salicílico.</p>";

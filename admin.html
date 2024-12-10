@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body>
+    <header>
+        <h1>Painel Administrativo</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" aria-label="Voltar para o Início">Início</a></li>
+                <li><a href="#usuarios" aria-label="Gerenciar Usuários">Usuários</a></li>
+                <li><a href="#conteudo" aria-label="Gerenciar Conteúdo">Conteúdo</a></li>
+                <li><a href="#configuracoes" aria-label="Configurações">Configurações</a></li>
+                <li><a href="login.html" aria-label="Logout">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="usuarios">
+            <h2>Gerenciar Usuários</h2>
+            <p>Aqui você pode visualizar, adicionar ou remover usuários do site.</p>
+        </section>
+
+        <section id="conteudo">
+            <h2>Gerenciar Conteúdo</h2>
+            <p>Aqui você pode criar, editar ou excluir postagens e seções.</p>
+        </section>
+
+        <section id="configuracoes">
+            <h2>Configurações</h2>
+            <p>Ajuste as configurações gerais do site.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Cuidados com a Pele. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Verifica se o usuário está logado
+        if (!sessionStorage.getItem('loggedIn')) {
+            window.location.href = 'login.html'; // Redireciona para o login se não estiver autenticado
+        }
+    </script>
+</body>
+</html>
