@@ -26,6 +26,8 @@
         <section id="resenhas">
             <h2>Resenhas de Produtos</h2>
             <p>Aqui estão algumas análises detalhadas de produtos populares:</p>
+
+            <!-- Lista de resenhas -->
             <div class="flex-container">
                 <div class="flex-item">
                     <h3>Gel de Limpeza Facial</h3>
@@ -40,11 +42,83 @@
                     <p>Protetor solar leve que não deixa a pele oleosa.</p>
                 </div>
             </div>
+
+            <!-- Formulário para adicionar resenha -->
+            <h3>Adicionar sua resenha</h3>
+            <form id="form-resenha" action="javascript:void(0)" method="post" enctype="multipart/form-data">
+                <label for="nome-produto">Nome do Produto:</label>
+                <input type="text" id="nome-produto" name="nome-produto" required placeholder="Ex: Gel de Limpeza Facial">
+                
+                <label for="avaliacao">Avaliação (1 a 5):</label>
+                <input type="number" id="avaliacao" name="avaliacao" min="1" max="5" required>
+                
+                <label for="comentario">Comentário:</label>
+                <textarea id="comentario" name="comentario" rows="4" required placeholder="Sua opinião sobre o produto..."></textarea>
+                
+                <label for="imagem">Imagem do Produto (opcional):</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*">
+                
+                <button type="submit">Adicionar Resenha</button>
+            </form>
+
+            <!-- Container para exibir resenhas enviadas -->
+            <div id="resenhas-enviadas">
+                <h4>Resenhas Recentes:</h4>
+                <!-- As resenhas serão exibidas aqui -->
+            </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Cuidados com a Pele. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        // Função para adicionar uma nova resenha
+        document.getElementById('form-resenha').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Pegar os valores do formulário
+            const nomeProduto = document.getElementById('nome-produto').value;
+            const avaliacao = document.getElementById('avaliacao').value;
+            const comentario = document.getElementById('comentario').value;
+            const imagem = document.getElementById('imagem').files[0];
+
+            // Criar um novo elemento de resenha
+            const novaResenha = document.createElement('div');
+            novaResenha.classList.add('flex-item');
+
+            // Criar um elemento de imagem (se houver)
+            let imagemResenha = '';
+            if (imagem) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagemResenha = `<img src="${e.target.result}" alt="Imagem do produto" class="resenha-imagem">`;
+                    // Adicionar a imagem e o conteúdo da resenha
+                    novaResenha.innerHTML = `
+                        <h3>${nomeProduto}</h3>
+                        <p><strong>Avaliação:</strong> ${avaliacao}/5</p>
+                        <p>${comentario}</p>
+                        ${imagemResenha}
+                    `;
+                    // Adicionar a nova resenha ao container de resenhas enviadas
+                    document.getElementById('resenhas-enviadas').appendChild(novaResenha);
+                };
+                reader.readAsDataURL(imagem);
+            } else {
+                // Adicionar a resenha sem imagem
+                novaResenha.innerHTML = `
+                    <h3>${nomeProduto}</h3>
+                    <p><strong>Avaliação:</strong> ${avaliacao}/5</p>
+                    <p>${comentario}</p>
+                `;
+                // Adicionar a nova resenha ao container de resenhas enviadas
+                document.getElementById('resenhas-enviadas').appendChild(novaResenha);
+            }
+
+            // Limpar o formulário
+            document.getElementById('form-resenha').reset();
+        });
+    </script>
 </body>
 </html>
